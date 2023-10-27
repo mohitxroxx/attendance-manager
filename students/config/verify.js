@@ -16,7 +16,7 @@ module.exports = function(passport) {
           throw err;
           if (isMatch)
             console.log('Logged in successfully',user.username)
-            else
+          else
             console.log('Wrong password')
         })
       })

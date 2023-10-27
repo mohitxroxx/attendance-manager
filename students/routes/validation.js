@@ -3,7 +3,7 @@ const validation={
         if(req.isAuthenticated())
         return next();
         req.flash('LOGIN Required')
-        res.redirect('/auth/login')
+        res.redirect('/users/login')
     },
     redirect:function(req,res,next){
         if(!req.isAuthenticated())

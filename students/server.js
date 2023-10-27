@@ -25,7 +25,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/',require('./routes/home.js'))
-app.use('/auth',require('./routes/auth.js'))
+app.use('/users',require('./routes/auth.js'))
 
 const PORT=process.env.PORT || 5000
 app.listen(PORT,console.log('server up and running on PORT',PORT))
