@@ -2,6 +2,8 @@
 
 Jai Hind everyone, welcome to this repository of our team for task 2 of BDCOE.
 
+API-DOCUMENTATION - https://documenter.getpostman.com/view/30426278/2s9YRGxUhL
+
 The core idea behind our project is to create an attendance manager for any organisation where admin can provide access to the users and update their attendance,
 while the users can check their attendance and updates shared by the admin.
 

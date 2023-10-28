@@ -16,7 +16,7 @@ router.post('/register',(req,res)=>{
     else{
         users.findOne({username:username}).then(user=>{
             if(user){
-                console.log('Username already exists')
+                res.json({ message: 'username already exists' });
             }
             else{
                 const newUser=new users({
@@ -28,7 +28,10 @@ router.post('/register',(req,res)=>{
                       if (err) throw err;
                       newUser.password = hash;
                       newUser.save().then(user => {
-                          console.log('You are now registered and can log in', newUser.username)
+                        res.json({
+                            message: 'You are now registered and can log in',
+                            name: newUser.name
+                          });
                           res.redirect('/users/login')
                         })
                         .catch(err=>console.log(err));
@@ -39,23 +42,68 @@ router.post('/register',(req,res)=>{
     }
 })
 
-router.post('/login',(req,res,next)=>{
-    passport.authenticate('local',{
-        successRedirect:'/dashboard',
-        failureRedirect:'/users/login',
-    })(req,res,next)
-})
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.status(401).json({message:info.message });
+      }
+      req.logIn(user, err => {
+        if (err) {
+          return next(err);
+        }
+        return res.status(200).json({message: 'Logged in successfully'});
+      });
+    })(req, res, next);
+  });
+  
+router.get('/view-attendance', (req, res) => {
+    res.json("present")
+    users.findOne({ username: req.user.username }, (err, student) => {
+      if (err) {
+        console.log('Error:', err);
+        res.status(500).send('Error');
+      } else {
+        res.json(student.attendance);
+      }
+    });
+  }); 
 
 router.get('/logout',function(req,res,next){
     req.logout(function(err){
         if(err)
         return next(err)
+        console.log("logged out successfully")
         res.redirect('/')
-    })
+    }) 
 })
 
-// router.post('/resetpassword',function(req,res,next){
-//     const {newp}=req.body;
-// })
+router.post('/resetpass', (req, res) => {
+    const { username, newPassword } = req.body
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(newPassword, salt, (err, hash) => {
+        if (err) {
+          console.log('Error:', err);
+          res.status(500).send('Error changing password')
+        } else {
+          users.findOneAndUpdate(
+            { username: username },
+            { $set: { password: hash } },
+            (err, user) => { 
+              if (err) {
+                console.log('Error:', err)
+                res.status(500).send('Error changing password')
+              } else {
+                console.log('Password changed successfully')
+                res.send('Password changed successfully')
+              }
+            }
+          )
+        }
+      })
+    })
+})
 
 module.exports=router;
