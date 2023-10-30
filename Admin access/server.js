@@ -28,8 +28,8 @@ app.use('/',require('./routes/home.js'))
 app.use('/auth',require('./routes/auth.js'))
 
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const GOOGLE_CLIENT_ID = '314213410397-8irgj1u87btqb33o5j0ctqe4rjaud3h8.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+const GOOGLE_CLIENT_ID = 'KEY NHI SHARE KRI JAATI';
+const GOOGLE_CLIENT_SECRET = 'SAME KEY NHI DENI HOTI';
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
