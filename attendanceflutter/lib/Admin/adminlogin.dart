@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:attendanceflutter/Admin/adminattendance.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+late SharedPreferences prefs;
 
 class AdminLogin extends StatefulWidget {
   @override
@@ -9,6 +16,19 @@ class AdminLogin extends StatefulWidget {
 class _AdminLoginState extends State<AdminLogin> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void adminLogin() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var reqBody = {
+        "email": emailController.text,
+        "password": passwordController.text
+      };
+      // var response = await http.post(Uri.parse(registration),
+      //     headers: {"Content-Type": "application/json"},
+      //     body: jsonEncode(reqBody));
+      // var jsonRespone = jsonDecode(response.body);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,22 +123,33 @@ class _AdminLoginState extends State<AdminLogin> {
                     height: h * 0.04,
                   ),
                   TextButton(onPressed: () {}, child: Text('Forgot Password?')),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle login logic here
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AdminAttendance(),
-                          ));
-                      print('$emailController');
-                      print('$passwordController');
-                    },
-                    child: Text('Login'),
-                  ),
-                  SizedBox(
-                    height: h * 0.02,
-                    width: w * 0.02,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // Handle login logic here
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AdminAttendance(),
+                              ));
+                          print('$emailController');
+                          print('$passwordController');
+                        },
+                        child: Text('Login'),
+                      ),
+                      SizedBox(
+                        height: h * 0.02,
+                        width: w * 0.1,
+                      ),
+                      IconButton(
+                        icon: Image.asset(
+                          "assets/google.png",
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
                   // Text("Don't Have an Account ?"),
                   // SizedBox(

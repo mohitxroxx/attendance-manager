@@ -23,6 +23,8 @@ class _AdminAttendanceState extends State<AdminAttendance> {
   ];
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -46,11 +48,11 @@ class _AdminAttendanceState extends State<AdminAttendance> {
               style: TextStyle(fontSize: 25),
             ),
             SizedBox(
-              width: 70,
+              width: 50,
             ),
             IconButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => AddUser(),
@@ -93,7 +95,7 @@ class _AdminAttendanceState extends State<AdminAttendance> {
                 ),
               ),
               SizedBox(
-                width: 240,
+                width: w * 0.56,
               ),
               FlutterSwitch(
                   activeColor: Colors.green,

@@ -2,6 +2,7 @@ import 'package:attendanceflutter/User/attendance.dart';
 import 'package:attendanceflutter/User/bottomnav.dart';
 import 'package:flutter/material.dart';
 import 'package:attendanceflutter/signup.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -107,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                   TextButton(onPressed: () {}, child: Text('Forgot Password?')),
                   ElevatedButton(
                     onPressed: () {
-                      // Handle login logic here
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

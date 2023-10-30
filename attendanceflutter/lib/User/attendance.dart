@@ -64,14 +64,14 @@ class _AttendanceState extends State<Attendance> {
                 width: 20,
               ),
               Container(
-                width: 150,
+                width: 120,
                 child: Text(
                   subjects[index],
                   style: TextStyle(fontSize: 20),
                 ),
               ),
               SizedBox(
-                width: 160,
+                width: w * 0.45,
               ),
               Checkbox(
                   activeColor: Colors.white,
